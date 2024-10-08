@@ -1,0 +1,68 @@
+import { Link } from "react-router-dom";
+import { commafy, getTimeDiffStr } from "@/utils/helpers";
+import ProgressBar from "@/ui/ProgressBar";
+
+function CampaignItem({ campaign }) {
+  const { id, name, closeDate, currentAmount, targetAmount, donationCount } =
+    campaign;
+
+  const daysRemain = getTimeDiffStr(new Date(closeDate), new Date(), "Đã đóng");
+
+  return (
+    <div className="flex overflow-hidden rounded-lg border-[1px] border-solid border-slate-300 bg-white shadow-sm shadow-slate-200 transition-shadow hover:shadow-xl">
+      <Link
+        to={`/campaign/${id}`}
+        title={name}
+        className="flex w-full flex-col"
+      >
+        <div className="flex flex-1 flex-col">
+          <img
+            src="https://placehold.co/960x540?text=test"
+            className="aspect-video object-cover object-center"
+            alt={name}
+          />
+          <div className="flex flex-1 flex-col gap-2 p-5">
+            <div className="flex flex-1 flex-col">
+              <h2 className="line-clamp-3 text-lg font-bold">{name}</h2>
+            </div>
+            <div className="mt-auto flex shrink-0 flex-col gap-2">
+              {currentAmount !== targetAmount && (
+                <div>
+                  <span className="rounded-xl bg-slate-200 px-3 py-1 text-xs">
+                    {daysRemain}
+                  </span>
+                </div>
+              )}
+              <div className="mb-2 flex flex-col gap-1">
+                <div>
+                  <span className="font-bold">{commafy(currentAmount)} đ</span>
+                  <span className="text-gray-500">
+                    {" "}
+                    / {commafy(targetAmount)} đ
+                  </span>
+                </div>
+                <ProgressBar current={currentAmount} target={targetAmount} />
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div className="flex flex-col">
+                  <span className="text-xs text-gray-500">Lượt quyên góp</span>
+                  <span className="font-bold">{commafy(donationCount)}</span>
+                </div>
+                <button
+                  className={`rounded-lg border-[1px] border-solid border-slate-700 bg-white px-3 py-1 text-sm font-bold transition-colors ${currentAmount >= targetAmount ? "text-slate-400" : "text-slate-800 hover:bg-slate-200"}`}
+                >
+                  {currentAmount === targetAmount
+                    ? "Đạt mục tiêu"
+                    : "Quyên góp"}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Link>
+    </div>
+  );
+}
+
+export default CampaignItem;
