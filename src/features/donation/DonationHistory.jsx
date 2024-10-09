@@ -11,9 +11,13 @@ import {
 import { commafy, formatDateTime } from "@/utils/helpers";
 import PaginationGroup from "@/ui/PaginationGroup";
 import SearchBar from "@/ui/SearchBar";
+import { useSearchParams } from "react-router-dom";
 
 function DonationHistory() {
   const { isLoading, data, isFetching } = useDonationHistory();
+  const [searchParams] = useSearchParams();
+
+  const queryName = searchParams.get("name");
 
   if (isLoading || isFetching)
     return (
@@ -42,13 +46,25 @@ function DonationHistory() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {content.map((row) => (
-              <TableRow key={row.id}>
-                <TableCell>{row.donorName?.name ?? "Nhà hảo tâm"}</TableCell>
-                <TableCell className="text-right">{`${commafy(row.amount)} đ`}</TableCell>
-                <TableCell>{formatDateTime(row.createdAt)}</TableCell>
+            {content.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={3} className="table-cell">
+                  <span className="flex justify-center">
+                    {queryName
+                      ? "Không tìm thấy kết quả"
+                      : "Chưa có người quyên góp"}
+                  </span>
+                </TableCell>
               </TableRow>
-            ))}
+            ) : (
+              content.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell>{row.donorName?.name ?? "Nhà hảo tâm"}</TableCell>
+                  <TableCell className="text-right">{`${commafy(row.amount)} đ`}</TableCell>
+                  <TableCell>{formatDateTime(row.createdAt)}</TableCell>
+                </TableRow>
+              ))
+            )}
           </TableBody>
         </Table>
         <PaginationGroup pageInfo={data} searchParamKey="donation-page" />
