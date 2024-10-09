@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/table";
 import { commafy, formatDateTime } from "@/utils/helpers";
 import PaginationGroup from "@/ui/PaginationGroup";
+import SearchBar from "@/ui/SearchBar";
 
 function DonationHistory() {
   const { isLoading, data, isFetching } = useDonationHistory();
@@ -25,6 +26,12 @@ function DonationHistory() {
 
   return (
     <>
+      <SearchBar
+        queryParamKey="name"
+        pageParamKey="donation-page"
+        inputPlaceholder="Tìm kiếm theo tên..."
+        loading={isLoading || isFetching}
+      />
       <div className="flex flex-col gap-4">
         <Table className="text-base">
           <TableHeader>

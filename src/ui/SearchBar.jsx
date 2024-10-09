@@ -1,37 +1,35 @@
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { HiOutlineMagnifyingGlass, HiOutlineXMark } from "react-icons/hi2";
-import { useCampaigns } from "@/features/campaign/useCampaigns";
 
-function CampaignSearch() {
-  const { isLoading, isFetching } = useCampaigns();
+function SearchBar({ queryParamKey, pageParamKey, inputPlaceholder, loading }) {
   const [query, setQuery] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
   const inputRef = useRef();
 
   useEffect(
     function () {
-      const query = searchParams.get("query");
+      const query = searchParams.get(queryParamKey);
       if (query) {
         setQuery(query);
       }
     },
-    [searchParams],
+    [searchParams, queryParamKey],
   );
 
   function handleClear() {
     setQuery("");
     inputRef.current.focus();
-    searchParams.set("query", "");
-    searchParams.set("page", 1);
+    searchParams.set(queryParamKey, "");
+    searchParams.set(pageParamKey, 1);
     setSearchParams(searchParams);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
     if (query.trim() === "") return;
-    searchParams.set("query", query);
-    searchParams.set("page", 1);
+    searchParams.set(queryParamKey, query);
+    searchParams.set(pageParamKey, 1);
     setSearchParams(searchParams);
   }
 
@@ -43,10 +41,10 @@ function CampaignSearch() {
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          disabled={isLoading || isFetching}
+          disabled={loading}
           className="w-full bg-inherit text-slate-900 focus:outline-none"
           ref={inputRef}
-          placeholder="Tìm kiếm chiến dịch..."
+          placeholder={inputPlaceholder}
         />
         {query !== "" && (
           <button
@@ -62,4 +60,4 @@ function CampaignSearch() {
   );
 }
 
-export default CampaignSearch;
+export default SearchBar;

@@ -6,12 +6,13 @@ export function useDonationHistory() {
   const { campaignId } = useParams();
   const [searchParams] = useSearchParams();
 
+  const name = searchParams.get("name") || "";
   const pageNoParam = Number.parseInt(searchParams.get("donation-page"));
   const pageNo = pageNoParam ? pageNoParam - 1 : 0;
 
   const { isLoading, data, isFetching } = useQuery({
-    queryKey: ["campaignDonation", Number(campaignId), pageNo],
-    queryFn: () => getDonationByCampaignId(campaignId, pageNo),
+    queryKey: ["campaignDonation", Number(campaignId), name, pageNo],
+    queryFn: () => getDonationByCampaignId(campaignId, name, pageNo),
     throwOnError: true,
   });
   return { isLoading, data, isFetching };
