@@ -1,6 +1,11 @@
-export async function getDonationByCampaignId(campaignId, pageNo = 0) {
+export async function getDonationByCampaignId(
+  campaignId,
+  name = "",
+  pageNo = 0,
+) {
   const params = {
     campaignId,
+    name,
     pageNo,
   };
   const queryString = "?" + new URLSearchParams(params).toString();
