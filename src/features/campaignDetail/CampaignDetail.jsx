@@ -23,7 +23,7 @@ function CampaignDetail() {
   }
 
   const { postId } = data;
-  const hasPost = postId !== -1;
+  const hasPost = postId !== null;
 
   return (
     <>
