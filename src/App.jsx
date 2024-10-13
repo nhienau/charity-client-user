@@ -16,11 +16,13 @@ import Campaign from "@/pages/Campaign";
 import PageNotFound from "@/pages/PageNotFound";
 import Layout from "@/ui/Layout";
 import ErrorFallback from "./ui/ErrorFallback";
+import Login from "./pages/Login";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<Layout />} ErrorBoundary={ErrorFallback}>
       <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/campaign/:campaignId" element={<Campaign />} />
       <Route path="*" element={<PageNotFound />} />
     </Route>,

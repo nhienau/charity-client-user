@@ -6,6 +6,9 @@ function Navigation() {
       <NavLink to="/" title="Trang chủ">
         Home
       </NavLink>
+      <NavLink to="/login" title="Trang chủ">
+        Đăng nhập
+      </NavLink>
     </nav>
   );
 }
