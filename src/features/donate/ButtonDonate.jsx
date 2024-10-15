@@ -7,7 +7,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { MultiStepFormProvider } from "@/contexts/MultiStepFormContext";
-import DonateMasterForm from "@/features/donate/DonateMasterForm";
+import DonateDialogContent from "./DonateDialogContent";
 
 function ButtonDonate({ campaign }) {
   const { name } = campaign;
@@ -28,7 +28,7 @@ function ButtonDonate({ campaign }) {
           </DialogDescription>
         </DialogHeader>
         <MultiStepFormProvider steps={2}>
-          <DonateMasterForm />
+          <DonateDialogContent />
         </MultiStepFormProvider>
       </DialogContent>
     </Dialog>

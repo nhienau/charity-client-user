@@ -1,15 +1,13 @@
 import { useMultiStepForm } from "@/contexts/MultiStepFormContext";
 import DonateForm from "./DonateForm";
 import DonateQr from "./DonateQr";
-import DonateInstruction from "./DonateInstruction";
 
-function DonateMasterForm() {
+function DonateMasterForm({ setFormState }) {
   const { currentStep } = useMultiStepForm();
 
   return (
-    <div className="flex flex-1 flex-col gap-4 md:grid md:grid-cols-5 md:items-center md:gap-8">
-      <DonateInstruction />
-      {currentStep === 1 && <DonateForm />}
+    <div className="grow md:flex md:items-center md:justify-center">
+      {currentStep === 1 && <DonateForm setFormState={setFormState} />}
       {currentStep === 2 && <DonateQr />}
     </div>
   );

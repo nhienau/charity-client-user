@@ -10,7 +10,7 @@ function ButtonLogin() {
     return <Spinner />;
   } else if (user == null) {
     return (
-      <NavLink to="/login" title="Trang chủ">
+      <NavLink to="/login" title="Đăng nhập">
         Đăng nhập
       </NavLink>
     );
