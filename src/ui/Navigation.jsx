@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import ButtonLogin from "./ButtonLogin";
 
 function Navigation() {
   return (
@@ -6,6 +7,7 @@ function Navigation() {
       <NavLink to="/" title="Trang chủ">
         Home
       </NavLink>
+      <ButtonLogin />
     </nav>
   );
 }

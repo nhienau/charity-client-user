@@ -59,7 +59,11 @@ function DonationHistory() {
             ) : (
               content.map((row) => (
                 <TableRow key={row.id}>
-                  <TableCell>{row.donorName?.name ?? "Nhà hảo tâm"}</TableCell>
+                  <TableCell>
+                    {row.showIdentity
+                      ? (row.donor?.defaultName ?? row.donorName?.name)
+                      : "Nhà hảo tâm"}
+                  </TableCell>
                   <TableCell className="text-right">{`${commafy(row.amount)} đ`}</TableCell>
                   <TableCell>{formatDateTime(row.createdAt)}</TableCell>
                 </TableRow>
