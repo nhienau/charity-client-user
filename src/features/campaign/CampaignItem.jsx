@@ -1,10 +1,18 @@
 import { Link } from "react-router-dom";
 import { commafy, getTimeDiffStr } from "@/utils/helpers";
 import ProgressBar from "@/ui/ProgressBar";
+import OptimizedImage from "@/ui/OptimizedImage";
 
 function CampaignItem({ campaign }) {
-  const { id, name, closeDate, currentAmount, targetAmount, donationCount } =
-    campaign;
+  const {
+    id,
+    name,
+    closeDate,
+    currentAmount,
+    targetAmount,
+    donationCount,
+    campaignImage,
+  } = campaign;
 
   const daysRemain = getTimeDiffStr(new Date(closeDate), new Date(), "Đã đóng");
 
@@ -16,11 +24,19 @@ function CampaignItem({ campaign }) {
         className="flex w-full flex-col"
       >
         <div className="flex flex-1 flex-col">
-          <img
-            src="https://placehold.co/960x540?text=test"
-            className="aspect-video object-cover object-center"
-            alt={name}
-          />
+          {campaignImage.length === 0 ? ( // Placeholder image, replace later
+            <img
+              src="https://placehold.co/960x540?text=test"
+              className="aspect-video object-cover object-center"
+              alt={name}
+            />
+          ) : (
+            <OptimizedImage
+              url={campaignImage[0].url}
+              className="aspect-video object-cover object-center"
+              alt={name}
+            />
+          )}
           <div className="flex flex-1 flex-col gap-2 p-5">
             <div className="flex flex-1 flex-col">
               <h2 className="line-clamp-3 text-lg font-bold">{name}</h2>
