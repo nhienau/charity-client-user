@@ -8,6 +8,6 @@ const PassUser = () => {
       </section>
     </div>
   );
-}
+};
 
 export default PassUser;

@@ -16,8 +16,7 @@ function DropdownUser() {
   const { user } = useUser();
   const { logout, isLoading } = useLogout();
 
-  const { defaultName } = user;
-  const { id } = user;
+  const { id, defaultName } = user;
 
   return (
     <DropdownMenu>
@@ -31,15 +30,15 @@ function DropdownUser() {
         <DropdownMenuLabel>{defaultName}</DropdownMenuLabel>
         <DropdownMenuSeparator className="bg-slate-200" />
         <Link to={`/profile/${id}`}>
-        <DropdownMenuItem>
-          <User className="mr-2 h-4 w-4" />
-          <span>Cá nhân</span>
-        </DropdownMenuItem>
-        </Link>
           <DropdownMenuItem>
-            <History className="mr-2 h-4 w-4" />
-            <span>Lịch sử quyên góp</span>
+            <User className="mr-2 h-4 w-4" />
+            <span>Cá nhân</span>
           </DropdownMenuItem>
+        </Link>
+        <DropdownMenuItem>
+          <History className="mr-2 h-4 w-4" />
+          <span>Lịch sử quyên góp</span>
+        </DropdownMenuItem>
         <DropdownMenuItem onClick={logout} disabled={isLoading}>
           <LogOut className="mr-2 h-4 w-4" />
           <span>Đăng xuất</span>
