@@ -13,6 +13,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import Home from "@/pages/Home";
 import Campaign from "@/pages/Campaign";
+import PassUser from "@/pages/PasswordUser";
 import PageNotFound from "@/pages/PageNotFound";
 import Layout from "@/ui/Layout";
 import ErrorFallback from "./ui/ErrorFallback";
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<Login />} />
       </Route>
+      <Route path="/profile/:userId" element={<PassUser />} />
     </Route>,
   ),
 );

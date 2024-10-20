@@ -36,6 +36,31 @@ export async function getUserInfo() {
   return data;
 }
 
+export async function changePassword(currentPassword, newPassword) {
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/change-password`, {
+    method: "POST",
+    credentials: "include", // Bao gồm cookie (ví dụ: session)
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      currentPassword,
+      newPassword,
+    }),
+  });
+
+  if (res.status === 401) {
+    throw new Error("Mật khẩu hiện tại không đúng.");
+  }
+
+  if (!res.ok) {
+    throw new Error("Đổi mật khẩu thất bại. Vui lòng thử lại.");
+  }
+
+  const data = await res.json();
+  return data;
+}
+
 export async function logout() {
   const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/logout`, {
     credentials: "include",
