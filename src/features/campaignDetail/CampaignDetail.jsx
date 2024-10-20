@@ -6,6 +6,7 @@ import DonationInfo from "./DonationInfo";
 import Spinner from "@/ui/Spinner";
 import CampaignPost from "./CampaignPost";
 import DonationHistory from "../donation/DonationHistory";
+import CampaignImages from "./CampaignImages";
 
 function CampaignDetail() {
   const { isLoading, data, isFetching } = useCampaign();
@@ -22,19 +23,14 @@ function CampaignDetail() {
     return <PageNotFound />;
   }
 
-  const { postId } = data;
+  const { campaignImage, postId } = data;
   const hasPost = postId !== null;
 
   return (
     <>
       <div className="mb-6 grid grid-cols-12 gap-6">
         <CampaignHeadline campaign={data} />
-        <div className="order-1 col-span-12 md:order-2 md:col-span-6 lg:col-span-8">
-          <img
-            src="https://placehold.co/960x540?text=test"
-            className="aspect-video w-full object-cover object-center"
-          />
-        </div>
+        <CampaignImages images={campaignImage} />
         <DonationInfo campaign={data} />
       </div>
 
