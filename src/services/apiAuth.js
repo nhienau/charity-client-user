@@ -37,17 +37,20 @@ export async function getUserInfo() {
 }
 
 export async function changePassword(currentPassword, newPassword) {
-  const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/change-password`, {
-    method: "POST",
-    credentials: "include", // Bao gồm cookie (ví dụ: session)
-    headers: {
-      "Content-Type": "application/json",
+  const res = await fetch(
+    `${import.meta.env.VITE_API_URL}/auth/change-password`,
+    {
+      method: "POST",
+      credentials: "include", // Bao gồm cookie (ví dụ: session)
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        currentPassword,
+        newPassword,
+      }),
     },
-    body: JSON.stringify({
-      currentPassword,
-      newPassword,
-    }),
-  });
+  );
 
   if (res.status === 401) {
     throw new Error("Mật khẩu hiện tại không đúng.");
