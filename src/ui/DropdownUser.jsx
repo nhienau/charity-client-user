@@ -10,12 +10,14 @@ import { useLogout } from "@/features/authentication/useLogout";
 import { useUser } from "@/features/authentication/useUser";
 import { History, LogOut, User } from "lucide-react";
 import { HiChevronDown, HiOutlineUserCircle } from "react-icons/hi2";
+import { Link } from "react-router-dom";
 
 function DropdownUser() {
   const { user } = useUser();
   const { logout, isLoading } = useLogout();
 
   const { defaultName } = user;
+  const { id } = user;
 
   return (
     <DropdownMenu>
@@ -28,14 +30,16 @@ function DropdownUser() {
       <DropdownMenuContent className="w-48 bg-white">
         <DropdownMenuLabel>{defaultName}</DropdownMenuLabel>
         <DropdownMenuSeparator className="bg-slate-200" />
+        <Link to={`/profile/${id}`}>
         <DropdownMenuItem>
           <User className="mr-2 h-4 w-4" />
           <span>Cá nhân</span>
         </DropdownMenuItem>
-        <DropdownMenuItem>
-          <History className="mr-2 h-4 w-4" />
-          <span>Lịch sử quyên góp</span>
-        </DropdownMenuItem>
+        </Link>
+          <DropdownMenuItem>
+            <History className="mr-2 h-4 w-4" />
+            <span>Lịch sử quyên góp</span>
+          </DropdownMenuItem>
         <DropdownMenuItem onClick={logout} disabled={isLoading}>
           <LogOut className="mr-2 h-4 w-4" />
           <span>Đăng xuất</span>

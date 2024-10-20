@@ -6,6 +6,8 @@ import DropdownUser from "./DropdownUser";
 function ButtonLogin() {
   const { isLoading, user, isFetching } = useUser();
 
+  console.log(user);
+
   if (isLoading || isFetching) {
     return <Spinner />;
   } else if (user == null) {
