@@ -68,9 +68,7 @@ function CampaignItem({ campaign }) {
                 <button
                   className={`rounded-lg border-[1px] border-solid border-slate-700 bg-white px-3 py-1 text-sm font-bold transition-colors ${currentAmount >= targetAmount ? "text-slate-400" : "text-slate-800 hover:bg-slate-200"}`}
                 >
-                  {currentAmount === targetAmount
-                    ? "Đạt mục tiêu"
-                    : "Quyên góp"}
+                  {currentAmount >= targetAmount ? "Đạt mục tiêu" : "Quyên góp"}
                 </button>
               </div>
             </div>
