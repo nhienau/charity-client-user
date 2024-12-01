@@ -35,10 +35,12 @@ function DropdownUser() {
             <span>Cá nhân</span>
           </DropdownMenuItem>
         </Link>
-        <DropdownMenuItem>
-          <History className="mr-2 h-4 w-4" />
-          <span>Lịch sử quyên góp</span>
-        </DropdownMenuItem>
+        <Link to="/history">
+          <DropdownMenuItem>
+            <History className="mr-2 h-4 w-4" />
+            <span>Lịch sử quyên góp</span>
+          </DropdownMenuItem>
+        </Link>
         <DropdownMenuItem onClick={logout} disabled={isLoading}>
           <LogOut className="mr-2 h-4 w-4" />
           <span>Đăng xuất</span>

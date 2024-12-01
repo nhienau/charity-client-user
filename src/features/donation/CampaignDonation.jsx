@@ -1,5 +1,5 @@
 import Spinner from "@/ui/Spinner";
-import { useDonationHistory } from "./useDonationHistory";
+import { useCampaignDonation } from "./useCampaignDonation";
 import {
   Table,
   TableBody,
@@ -13,8 +13,8 @@ import PaginationGroup from "@/ui/PaginationGroup";
 import SearchBar from "@/ui/SearchBar";
 import { useSearchParams } from "react-router-dom";
 
-function DonationHistory() {
-  const { isLoading, data, isFetching } = useDonationHistory();
+function CampaignDonation() {
+  const { isLoading, data, isFetching } = useCampaignDonation();
   const [searchParams] = useSearchParams();
 
   const queryName = searchParams.get("name");
@@ -77,4 +77,4 @@ function DonationHistory() {
   );
 }
 
-export default DonationHistory;
+export default CampaignDonation;

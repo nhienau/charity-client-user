@@ -5,7 +5,7 @@ import CampaignHeadline from "./CampaignHeadline";
 import DonationInfo from "./DonationInfo";
 import Spinner from "@/ui/Spinner";
 import CampaignPost from "./CampaignPost";
-import DonationHistory from "../donation/DonationHistory";
+import CampaignDonation from "../donation/CampaignDonation";
 import CampaignImages from "./CampaignImages";
 
 function CampaignDetail() {
@@ -45,7 +45,7 @@ function CampaignDetail() {
           </TabsContent>
         )}
         <TabsContent value="donation">
-          <DonationHistory />
+          <CampaignDonation />
         </TabsContent>
       </Tabs>
     </>

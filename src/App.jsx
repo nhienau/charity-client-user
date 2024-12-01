@@ -19,17 +19,22 @@ import Layout from "@/ui/Layout";
 import ErrorFallback from "./ui/ErrorFallback";
 import Login from "./pages/Login";
 import AuthLayout from "./ui/AuthLayout";
+import DonationHistory from "@/pages/DonationHistory";
+import ProtectedRoute from "./ui/ProtectedRoute";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<Layout />} ErrorBoundary={ErrorFallback}>
       <Route path="/" element={<Home />} />
       <Route path="/campaign/:campaignId" element={<Campaign />} />
-      <Route path="*" element={<PageNotFound />} />
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<Login />} />
       </Route>
+      <Route element={<ProtectedRoute />}>
+        <Route path="/history" element={<DonationHistory />} />
+      </Route>
       <Route path="/profile/:userId" element={<PassUser />} />
+      <Route path="*" element={<PageNotFound />} />
     </Route>,
   ),
 );
