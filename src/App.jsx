@@ -22,21 +22,64 @@ import DonationHistory from "@/pages/DonationHistory";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import DonationSearch from "@/pages/DonationSearch";
 import Profile from "@/pages/Profile";
+import Page from "./ui/Page";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<Layout />} ErrorBoundary={ErrorFallback}>
-      <Route path="/" element={<Home />} />
+      <Route
+        path="/"
+        element={
+          <Page>
+            <Home />
+          </Page>
+        }
+      />
       <Route path="/campaign/:campaignId" element={<Campaign />} />
-      <Route path="/donation-search" element={<DonationSearch />} />
+      <Route
+        path="/donation-search"
+        element={
+          <Page title="Tra cứu quyên góp">
+            <DonationSearch />
+          </Page>
+        }
+      />
       <Route element={<AuthLayout />}>
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/login"
+          element={
+            <Page title="Đăng nhập">
+              <Login />
+            </Page>
+          }
+        />
       </Route>
       <Route element={<ProtectedRoute />}>
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/history" element={<DonationHistory />} />
+        <Route
+          path="/profile"
+          element={
+            <Page title="Cá nhân">
+              <Profile />
+            </Page>
+          }
+        />
+        <Route
+          path="/history"
+          element={
+            <Page title="Lịch sử quyên góp">
+              <DonationHistory />
+            </Page>
+          }
+        />
       </Route>
-      <Route path="*" element={<PageNotFound />} />
+      <Route
+        path="*"
+        element={
+          <Page title="Lỗi">
+            <PageNotFound />
+          </Page>
+        }
+      />
     </Route>,
   ),
 );
@@ -44,7 +87,7 @@ const router = createBrowserRouter(
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 60 * 1000,
+      staleTime: 5 * 60 * 1000,
     },
   },
   // queryCache: new QueryCache({
