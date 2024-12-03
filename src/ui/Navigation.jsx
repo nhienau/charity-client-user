@@ -8,7 +8,7 @@ function Navigation() {
         <NavLink to="/" title="Trang chủ">
           Home
         </NavLink>
-        <NavLink to="/donation-search" title="Trang chủ">
+        <NavLink to="/donation-search" title="Tra cứu quyên góp">
           Tra cứu quyên góp
         </NavLink>
       </div>

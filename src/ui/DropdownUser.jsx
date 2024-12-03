@@ -11,12 +11,21 @@ import { useUser } from "@/features/authentication/useUser";
 import { History, LogOut, User } from "lucide-react";
 import { HiChevronDown, HiOutlineUserCircle } from "react-icons/hi2";
 import { Link } from "react-router-dom";
+import Spinner from "./Spinner";
 
 function DropdownUser() {
   const { user } = useUser();
-  const { logout, isLoading } = useLogout();
+  const { logout, isPending } = useLogout();
 
   const { defaultName } = user;
+
+  if (isPending) {
+    return (
+      <div className="flex items-center justify-center px-4">
+        <Spinner />
+      </div>
+    );
+  }
 
   return (
     <DropdownMenu>
@@ -41,7 +50,7 @@ function DropdownUser() {
             <span>Lịch sử quyên góp</span>
           </DropdownMenuItem>
         </Link>
-        <DropdownMenuItem onClick={logout} disabled={isLoading}>
+        <DropdownMenuItem onClick={logout}>
           <LogOut className="mr-2 h-4 w-4" />
           <span>Đăng xuất</span>
         </DropdownMenuItem>

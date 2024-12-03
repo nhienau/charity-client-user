@@ -8,7 +8,7 @@ function LoginForm() {
   const { register, handleSubmit, formState } = useForm({
     defaultValues: {},
   });
-  const { login, isLoading } = useLogin();
+  const { login, isPending } = useLogin();
 
   const { errors } = formState;
 
@@ -45,8 +45,8 @@ function LoginForm() {
             </FormRow>
           </div>
           <div className="mt-2 flex items-center justify-center">
-            <button className="flex min-w-28 items-center justify-center rounded-md border-[1px] border-solid border-slate-300 px-4 py-2 transition-colors hover:bg-slate-600 hover:text-slate-200">
-              {isLoading ? <Spinner /> : "Đăng nhập"}
+            <button className="flex h-[2.625rem] min-w-28 items-center justify-center rounded-md border-[1px] border-solid border-slate-300 px-4 py-2 transition-colors hover:bg-slate-600 hover:text-slate-200 disabled:bg-slate-200 disabled:text-slate-500">
+              {isPending ? <Spinner /> : "Đăng nhập"}
             </button>
           </div>
         </form>
