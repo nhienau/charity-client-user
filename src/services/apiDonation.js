@@ -41,3 +41,28 @@ export async function getDonationHistory({
   }
   return data;
 }
+
+export async function searchDonation({
+  donorName = "",
+  campaignName = "",
+  pageNo = 0,
+  fromDate,
+  toDate,
+}) {
+  const params = {
+    donorName,
+    campaignName,
+    pageNo,
+    fromDate,
+    toDate,
+  };
+  const queryString = "?" + new URLSearchParams(params).toString();
+  const res = await fetch(
+    `${import.meta.env.VITE_API_URL}/donation/search${queryString}`,
+  );
+  const data = await res.json();
+  if (data.status === 400) {
+    return null;
+  }
+  return data;
+}
