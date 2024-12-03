@@ -60,7 +60,7 @@ export async function changePassword(currentPassword, newPassword) {
     throw new Error("Đổi mật khẩu thất bại. Vui lòng thử lại.");
   }
 
-  const data = await res.json();
+  const data = await res.text();
   return data;
 }
 

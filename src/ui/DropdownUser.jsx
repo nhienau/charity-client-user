@@ -16,7 +16,7 @@ function DropdownUser() {
   const { user } = useUser();
   const { logout, isLoading } = useLogout();
 
-  const { id, defaultName } = user;
+  const { defaultName } = user;
 
   return (
     <DropdownMenu>
@@ -29,7 +29,7 @@ function DropdownUser() {
       <DropdownMenuContent className="w-48 bg-white">
         <DropdownMenuLabel>{defaultName}</DropdownMenuLabel>
         <DropdownMenuSeparator className="bg-slate-200" />
-        <Link to={`/profile/${id}`}>
+        <Link to="/profile">
           <DropdownMenuItem>
             <User className="mr-2 h-4 w-4" />
             <span>Cá nhân</span>

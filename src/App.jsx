@@ -13,7 +13,6 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import Home from "@/pages/Home";
 import Campaign from "@/pages/Campaign";
-import PassUser from "@/pages/PasswordUser";
 import PageNotFound from "@/pages/PageNotFound";
 import Layout from "@/ui/Layout";
 import ErrorFallback from "./ui/ErrorFallback";
@@ -22,6 +21,7 @@ import AuthLayout from "./ui/AuthLayout";
 import DonationHistory from "@/pages/DonationHistory";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import DonationSearch from "@/pages/DonationSearch";
+import Profile from "@/pages/Profile";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,9 +33,9 @@ const router = createBrowserRouter(
         <Route path="/login" element={<Login />} />
       </Route>
       <Route element={<ProtectedRoute />}>
+        <Route path="/profile" element={<Profile />} />
         <Route path="/history" element={<DonationHistory />} />
       </Route>
-      <Route path="/profile/:userId" element={<PassUser />} />
       <Route path="*" element={<PageNotFound />} />
     </Route>,
   ),
