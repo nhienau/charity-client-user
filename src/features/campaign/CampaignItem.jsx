@@ -24,9 +24,9 @@ function CampaignItem({ campaign }) {
         className="flex w-full flex-col"
       >
         <div className="flex flex-1 flex-col">
-          {campaignImage.length === 0 ? ( // Placeholder image, replace later
+          {campaignImage.length === 0 ? (
             <img
-              src="https://placehold.co/960x540?text=test"
+              src="placeholder.svg"
               className="aspect-video object-cover object-center"
               alt={name}
             />
