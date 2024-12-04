@@ -9,6 +9,7 @@ export function useZaloPayPaymentUrl() {
     queryKey: ["zalopayPaymentUrl", formData],
     queryFn: () => getZaloPayPaymentUrl(formData),
     throwOnError: true,
+    retry: 3,
     staleTime: 0,
   });
   return { isLoading, data, isFetching };
