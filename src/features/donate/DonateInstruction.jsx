@@ -2,7 +2,7 @@ import StepDescription from "@/ui/StepDescription";
 
 function DonateInstruction() {
   const instructions = [
-    "Nhập thông tin quyên góp và chọn hình thức thanh toán",
+    "Nhập thông tin quyên góp",
     "Chuyển hướng đến trang thanh toán",
   ];
 
