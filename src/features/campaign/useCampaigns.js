@@ -9,10 +9,11 @@ export function useCampaigns() {
   const pageNo = pageNoParam ? pageNoParam - 1 : 0;
 
   const query = searchParams.get("query") ?? "";
+  const filter = searchParams.get("filter") ?? "opening";
 
   const { isLoading, data, isFetching } = useQuery({
-    queryKey: ["campaigns", query, pageNo],
-    queryFn: () => getCampaigns(query, pageNo),
+    queryKey: ["campaigns", query, filter, pageNo],
+    queryFn: () => getCampaigns(query, filter, pageNo),
     throwOnError: true,
   });
   return { isLoading, data, isFetching };

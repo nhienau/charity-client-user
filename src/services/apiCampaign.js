@@ -1,6 +1,7 @@
-export async function getCampaigns(query = "", pageNo = 0) {
+export async function getCampaigns(query = "", filter = "opening", pageNo = 0) {
   const params = {
     query: query ?? "",
+    filter,
     pageNo,
   };
   const queryString = "?" + new URLSearchParams(params).toString();

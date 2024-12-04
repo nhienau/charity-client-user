@@ -1,8 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { HiOutlineMagnifyingGlass, HiOutlineXMark } from "react-icons/hi2";
+import { cn } from "@/lib/utils";
 
-function SearchBar({ queryParamKey, pageParamKey, inputPlaceholder, loading }) {
+function SearchBar({
+  queryParamKey,
+  pageParamKey,
+  inputPlaceholder,
+  loading,
+  className,
+}) {
   const [query, setQuery] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
   const inputRef = useRef();
@@ -34,8 +41,13 @@ function SearchBar({ queryParamKey, pageParamKey, inputPlaceholder, loading }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mb-3">
-      <div className="has-[:focus]:outline-solid flex max-w-80 items-center justify-between gap-2 rounded-md border-[1px] border-solid border-slate-400 px-3 py-2 has-[:focus]:outline has-[:focus]:outline-[1px] has-[:focus]:outline-slate-900">
+    <form onSubmit={handleSubmit}>
+      <div
+        className={cn(
+          "has-[:focus]:outline-solid flex max-w-96 items-center justify-between gap-2 rounded-md border-[1px] border-solid border-slate-400 px-3 py-2 has-[:focus]:outline has-[:focus]:outline-[1px] has-[:focus]:outline-slate-900",
+          className,
+        )}
+      >
         <HiOutlineMagnifyingGlass className="h-5 w-5 flex-shrink-0" />
         <input
           type="text"
