@@ -6,10 +6,19 @@ import DateField from "@/ui/DateField";
 import { useSearchParams } from "react-router-dom";
 
 function DonationSearchFilter() {
-  const { register, handleSubmit, control, formState, reset } = useForm({
-    defaultValues: {},
-  });
   const [searchParams, setSearchParams] = useSearchParams();
+  const { register, handleSubmit, control, formState, reset } = useForm({
+    defaultValues: {
+      phoneNumber: searchParams.get("phone-number") || "",
+      donorName: searchParams.get("donor-name") || "",
+      campaignName: searchParams.get("campaign-name") || "",
+      fromDate: searchParams.get("from")
+        ? new Date(searchParams.get("from"))
+        : null,
+      toDate: searchParams.get("to") ? new Date(searchParams.get("to")) : null,
+    },
+  });
+
   const { errors } = formState;
 
   const { field: fromDateField } = useController({
@@ -67,7 +76,7 @@ function DonationSearchFilter() {
   });
 
   function onSubmit(data) {
-    const { donorName, campaignName, fromDate, toDate } = data;
+    const { phoneNumber, donorName, campaignName, fromDate, toDate } = data;
 
     if (toDate) {
       toDate.setHours(23);
@@ -77,6 +86,7 @@ function DonationSearchFilter() {
 
     const fromDateStr = fromDate ? fromDate.toISOString() : "";
     const toDateStr = toDate ? toDate.toISOString() : "";
+    searchParams.set("phone-number", phoneNumber.trim());
     searchParams.set("donor-name", donorName.trim());
     searchParams.set("campaign-name", campaignName.trim());
     searchParams.set("from", fromDateStr);
@@ -85,7 +95,14 @@ function DonationSearchFilter() {
   }
 
   function resetParams() {
-    reset({ campaignName: "", donorName: "" });
+    reset({
+      phoneNumber: "",
+      campaignName: "",
+      donorName: "",
+      from: null,
+      to: null,
+    });
+    searchParams.set("phone-number", "");
     searchParams.set("donor-name", "");
     searchParams.set("campaign-name", "");
     searchParams.set("from", "");
@@ -96,8 +113,15 @@ function DonationSearchFilter() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mb-6 flex flex-col gap-4 md:grid md:grid-cols-2 md:grid-rows-2"
+      className="mb-6 flex flex-col gap-4 md:grid md:grid-cols-3 md:grid-rows-2"
     >
+      <FormRow label="Số điện thoại">
+        <Input
+          name="phoneNumber"
+          id="phoneNumber"
+          {...register("phoneNumber")}
+        />
+      </FormRow>
       <FormRow label="Tên nhà hảo tâm">
         <Input name="donorName" id="donorName" {...register("donorName")} />
       </FormRow>
@@ -126,7 +150,7 @@ function DonationSearchFilter() {
           <span className="text-red-700">{errors?.toDate?.message}</span>
         )}
       </div>
-      <div className="flex justify-end gap-2 md:col-span-2">
+      <div className="col-span-3 flex justify-end gap-2">
         <button
           type="button"
           className="flex items-center gap-x-2 rounded-md border-[1px] border-solid border-slate-300 bg-white px-4 py-1.5"
