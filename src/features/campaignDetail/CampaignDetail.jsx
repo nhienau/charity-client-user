@@ -5,7 +5,7 @@ import CampaignHeadline from "./CampaignHeadline";
 import DonationInfo from "./DonationInfo";
 import Spinner from "@/ui/Spinner";
 import CampaignPost from "./CampaignPost";
-import DonationHistory from "../donation/DonationHistory";
+import CampaignDonation from "../donation/CampaignDonation";
 import CampaignImages from "./CampaignImages";
 
 function CampaignDetail() {
@@ -23,7 +23,8 @@ function CampaignDetail() {
     return <PageNotFound />;
   }
 
-  const { campaignImage, postId } = data;
+  const { campaignImage, postId, disbursementPostId, postDonationPostId } =
+    data;
   const hasPost = postId !== null;
 
   return (
@@ -38,6 +39,14 @@ function CampaignDetail() {
         <TabsList>
           {hasPost && <TabsTrigger value="post">Câu chuyện</TabsTrigger>}
           <TabsTrigger value="donation">Lịch sử quyên góp</TabsTrigger>
+          {disbursementPostId && (
+            <TabsTrigger value="disbursement">Giải ngân</TabsTrigger>
+          )}
+          {postDonationPostId && (
+            <TabsTrigger value="postDonation">
+              Hoàn cảnh sau quyên góp
+            </TabsTrigger>
+          )}
         </TabsList>
         {hasPost && (
           <TabsContent value="post">
@@ -45,8 +54,18 @@ function CampaignDetail() {
           </TabsContent>
         )}
         <TabsContent value="donation">
-          <DonationHistory />
+          <CampaignDonation />
         </TabsContent>
+        {disbursementPostId && (
+          <TabsContent value="disbursement">
+            <CampaignPost postId={disbursementPostId} />
+          </TabsContent>
+        )}
+        {postDonationPostId && (
+          <TabsContent value="postDonation">
+            <CampaignPost postId={postDonationPostId} />
+          </TabsContent>
+        )}
       </Tabs>
     </>
   );

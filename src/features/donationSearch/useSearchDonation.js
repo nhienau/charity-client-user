@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
-import { getDonationHistory } from "@/services/apiDonation";
+import { searchDonation } from "@/services/apiDonation";
 
-export function useDonationHistory() {
+export function useSearchDonation() {
   const [searchParams] = useSearchParams();
 
+  const donorName = searchParams.get("donor-name") || "";
   const campaignName = searchParams.get("campaign-name") || "";
   const pageNoParam = Number.parseInt(searchParams.get("page"));
   const pageNo = pageNoParam ? pageNoParam - 1 : 0;
@@ -12,6 +13,7 @@ export function useDonationHistory() {
   const toDateStr = searchParams.get("to") || "";
 
   const params = {
+    donorName,
     campaignName,
     pageNo,
     fromDate: fromDateStr,
@@ -19,8 +21,8 @@ export function useDonationHistory() {
   };
 
   const { isLoading, data, isFetching } = useQuery({
-    queryKey: ["donationHistory", params],
-    queryFn: () => getDonationHistory(params),
+    queryKey: ["searchDonation", params],
+    queryFn: () => searchDonation(params),
     throwOnError: true,
     refetchOnMount: "always",
   });

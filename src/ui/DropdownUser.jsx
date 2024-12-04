@@ -11,12 +11,21 @@ import { useUser } from "@/features/authentication/useUser";
 import { History, LogOut, User } from "lucide-react";
 import { HiChevronDown, HiOutlineUserCircle } from "react-icons/hi2";
 import { Link } from "react-router-dom";
+import Spinner from "./Spinner";
 
 function DropdownUser() {
   const { user } = useUser();
-  const { logout, isLoading } = useLogout();
+  const { logout, isPending } = useLogout();
 
-  const { id, defaultName } = user;
+  const { defaultName } = user;
+
+  if (isPending) {
+    return (
+      <div className="flex items-center justify-center px-4">
+        <Spinner />
+      </div>
+    );
+  }
 
   return (
     <DropdownMenu>
@@ -29,17 +38,19 @@ function DropdownUser() {
       <DropdownMenuContent className="w-48 bg-white">
         <DropdownMenuLabel>{defaultName}</DropdownMenuLabel>
         <DropdownMenuSeparator className="bg-slate-200" />
-        <Link to={`/profile/${id}`}>
+        <Link to="/profile">
           <DropdownMenuItem>
             <User className="mr-2 h-4 w-4" />
             <span>Cá nhân</span>
           </DropdownMenuItem>
         </Link>
-        <DropdownMenuItem>
-          <History className="mr-2 h-4 w-4" />
-          <span>Lịch sử quyên góp</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={logout} disabled={isLoading}>
+        <Link to="/history">
+          <DropdownMenuItem>
+            <History className="mr-2 h-4 w-4" />
+            <span>Lịch sử quyên góp</span>
+          </DropdownMenuItem>
+        </Link>
+        <DropdownMenuItem onClick={logout}>
           <LogOut className="mr-2 h-4 w-4" />
           <span>Đăng xuất</span>
         </DropdownMenuItem>
