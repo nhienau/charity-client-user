@@ -6,6 +6,9 @@ function DonationInfo({ campaign }) {
   const { closeDate, currentAmount, donationCount, targetAmount, lecturer } =
     campaign;
 
+  const closeDateObj = new Date(closeDate);
+  const now = new Date();
+
   return (
     <div className="order-3 col-span-12 flex flex-col gap-6 md:col-span-6 lg:col-span-4">
       <h2 className="font-bold">Thông tin quyên góp</h2>
@@ -33,14 +36,16 @@ function DonationInfo({ campaign }) {
             <div>
               <p className="text-sm text-slate-500">Thời hạn</p>
               <p className="font-bold">
-                {getTimeDiffStr(new Date(closeDate), new Date(), "Đã đóng")}
+                {getTimeDiffStr(closeDateObj, now, "Đã đóng")}
               </p>
               <p>{formatDate(closeDate)}</p>
             </div>
           )}
         </div>
       </div>
-      {currentAmount < targetAmount && <ButtonDonate campaign={campaign} />}
+      {now < closeDateObj && currentAmount < targetAmount && (
+        <ButtonDonate campaign={campaign} />
+      )}
     </div>
   );
 }

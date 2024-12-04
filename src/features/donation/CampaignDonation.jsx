@@ -35,6 +35,7 @@ function CampaignDonation() {
         pageParamKey="donation-page"
         inputPlaceholder="Tìm kiếm theo tên..."
         loading={isLoading || isFetching}
+        className="my-3"
       />
       <div className="flex flex-col gap-4">
         <Table className="text-base">

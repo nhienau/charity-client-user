@@ -5,6 +5,7 @@ import { searchDonation } from "@/services/apiDonation";
 export function useSearchDonation() {
   const [searchParams] = useSearchParams();
 
+  const phoneNumber = searchParams.get("phone-number") || "";
   const donorName = searchParams.get("donor-name") || "";
   const campaignName = searchParams.get("campaign-name") || "";
   const pageNoParam = Number.parseInt(searchParams.get("page"));
@@ -13,6 +14,7 @@ export function useSearchDonation() {
   const toDateStr = searchParams.get("to") || "";
 
   const params = {
+    phoneNumber,
     donorName,
     campaignName,
     pageNo,

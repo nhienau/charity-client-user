@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { commafy, getTimeDiffStr } from "@/utils/helpers";
 import ProgressBar from "@/ui/ProgressBar";
 import OptimizedImage from "@/ui/OptimizedImage";
+import { cn } from "@/lib/utils";
 
 function CampaignItem({ campaign }) {
   const {
@@ -14,7 +15,9 @@ function CampaignItem({ campaign }) {
     campaignImage,
   } = campaign;
 
-  const daysRemain = getTimeDiffStr(new Date(closeDate), new Date(), "Đã đóng");
+  const closeDateObj = new Date(closeDate);
+  const now = new Date();
+  const daysRemain = getTimeDiffStr(closeDateObj, now, "Đã đóng");
 
   return (
     <div className="flex overflow-hidden rounded-lg border-[1px] border-solid border-slate-300 bg-white shadow-sm shadow-slate-200 transition-shadow hover:shadow-xl">
@@ -24,9 +27,9 @@ function CampaignItem({ campaign }) {
         className="flex w-full flex-col"
       >
         <div className="flex flex-1 flex-col">
-          {campaignImage.length === 0 ? ( // Placeholder image, replace later
+          {campaignImage.length === 0 ? (
             <img
-              src="https://placehold.co/960x540?text=test"
+              src="placeholder.svg"
               className="aspect-video object-cover object-center"
               alt={name}
             />
@@ -65,11 +68,30 @@ function CampaignItem({ campaign }) {
                   <span className="text-xs text-gray-500">Lượt quyên góp</span>
                   <span className="font-bold">{commafy(donationCount)}</span>
                 </div>
-                <button
-                  className={`rounded-lg border-[1px] border-solid border-slate-700 bg-white px-3 py-1 text-sm font-bold transition-colors ${currentAmount >= targetAmount ? "text-slate-400" : "text-slate-800 hover:bg-slate-200"}`}
-                >
-                  {currentAmount >= targetAmount ? "Đạt mục tiêu" : "Quyên góp"}
-                </button>
+                {currentAmount >= targetAmount && (
+                  <button
+                    className={cn(
+                      "rounded-lg border-[1px] border-solid border-slate-700 bg-white px-3 py-1 text-sm font-bold transition-colors",
+                      currentAmount >= targetAmount
+                        ? "text-slate-400"
+                        : "text-slate-800 hover:bg-slate-200",
+                    )}
+                  >
+                    Đạt mục tiêu
+                  </button>
+                )}
+                {currentAmount < targetAmount && now < closeDateObj && (
+                  <button
+                    className={cn(
+                      "rounded-lg border-[1px] border-solid border-slate-700 bg-white px-3 py-1 text-sm font-bold transition-colors",
+                      currentAmount >= targetAmount
+                        ? "text-slate-400"
+                        : "text-slate-800 hover:bg-slate-200",
+                    )}
+                  >
+                    Quyên góp
+                  </button>
+                )}
               </div>
             </div>
           </div>
