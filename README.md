@@ -21,3 +21,7 @@ npm install
 ```BASH
 npm run dev
 ```
+
+## Screenshots
+
+All screenshots can be found [here](screenshots.md).
